@@ -30,7 +30,7 @@ int main () {
             continue;
 
         if (parsed_input[0].compare("state") == 0) {
-            for (int i=1; i<parsed_input.size(); i+=2) {
+            for (uint i=1; i<parsed_input.size(); i+=2) {
                 try {
                 a.addState(parsed_input[i], parsed_input[i+1][0]);
                 cout << parsed_input[i] << " : Added state(s) successfully\n";
@@ -67,7 +67,7 @@ int main () {
         else if (parsed_input[0].compare("epsilon") == 0 && parsed_input[1].compare("closure") == 0) {
             cout << '\n';
             vector<string> epsClos = a.getEpsilonClosure(parsed_input[2]);
-            for (int i=0; i<epsClos.size(); i++)
+            for (uint i=0; i<epsClos.size(); i++)
                 cout << epsClos[i] << ' ';
             cout << '\n';
         }
