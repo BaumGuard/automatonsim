@@ -323,7 +323,7 @@ void Automaton::minimizeDFA() {
 
         equiGroups.clear();
 
-        for (int i=0; i<tempGroups.size(); i++) {
+        for (uint i=0; i<tempGroups.size(); i++) {
             if (tempGroups[i].size() > 0)
                 equiGroups.push_back(tempGroups[i]);
         }
@@ -331,17 +331,17 @@ void Automaton::minimizeDFA() {
     }
 
 
-    for (int a=0; a<equiGroups.size(); a++) {
+    for (uint a=0; a<equiGroups.size(); a++) {
 
         minimalStates["q"+to_string(a)] = State("q"+to_string(a), deterministicStates[equiGroups[a][0]].getStateType());
 
-        for (int b=0; b<deterministicStates[equiGroups[a][0]].getTransitions().size(); b++) {
+        for (uint b=0; b<deterministicStates[equiGroups[a][0]].getTransitions().size(); b++) {
 
             int index = 0;
 
-            for (int c=0; c<equiGroups.size(); c++) {
+            for (uint c=0; c<equiGroups.size(); c++) {
                 bool found = false;
-                for (int d=0; d<equiGroups[c].size(); d++) {
+                for (uint d=0; d<equiGroups[c].size(); d++) {
 
                     if (equiGroups[c][d] == deterministicStates[equiGroups[a][0]].getTransitions()[b].getDestState()) {
                         found = true;
