@@ -21,7 +21,6 @@ int main () {
     string command = "start";
 
     do {
-        cout << "> ";
         getline(cin, command);
 
         vector<string> parsed_input = splitString(command);
@@ -51,7 +50,7 @@ int main () {
             }
         }
         else if (parsed_input[0].compare("description") == 0) {
-            cout << '\n';
+            cout << "Description of the original automaton:\n\n";
             a.printDescription("original");
             cout << '\n';
         }
@@ -59,8 +58,12 @@ int main () {
             a.makeEpsilonFree();
             cout << "Made epsilon-free successfully\n\n";
         }
+        else if (command.compare("make deterministic") == 0) {
+            a.makeDeterministic();
+            cout << "Made deterministic successfully\n\n";
+        }
         else if (command.compare("epsilon free description") == 0) {
-            cout << '\n';
+            cout << "Description of the epsilon-free automaton:\n\n";
             a.printDescription("epsilon-free");
             cout << '\n';
         }
@@ -78,10 +81,14 @@ int main () {
             a.minimizeDFA();
         }
         else if (parsed_input[0].compare("deterministic") == 0 && parsed_input[1].compare("description")==0) {
+            cout << '\n';
             a.printDescription("deterministic");
+            cout << '\n';
         }
         else if (parsed_input[0].compare("minimal") == 0 && parsed_input[1].compare("description")==0) {
+            cout << "Description of the minimized automaton:\n\n";
             a.printDescription("minimal");
+            cout << '\n';
         }
         else if (command.compare("exit") == 0) {
             break;
@@ -89,7 +96,6 @@ int main () {
         else {
             cout << command << " : Invalid command\n";
         }
-
     }
 
     while (command.compare("exit"));
