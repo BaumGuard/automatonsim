@@ -40,7 +40,6 @@ void Automaton::addTransition(string sourceState, string destState, char symbol)
         throw noSuchState(sourceState);
     if (states.count(destState) == 0)
         throw noSuchState(destState);
-    cout << symbol << '\n';
 
     states.find(sourceState)->second.addTransition(sourceState, destState, symbol);
 
@@ -265,9 +264,9 @@ bool Automaton::isDeterministic() const {
 
 void Automaton::minimizeDFA() {
 
-    if (!isEpsilonFree())
+    if (!madeEpsFree)
         makeEpsilonFree();
-    if (!isDeterministic())
+    if (!madeDeterministic)
         makeDeterministic();
 
     vector<vector<string>> equiGroups;
@@ -336,7 +335,6 @@ void Automaton::minimizeDFA() {
         minimalStates["q"+to_string(a)] = State("q"+to_string(a), deterministicStates[equiGroups[a][0]].getStateType());
 
         for (uint b=0; b<deterministicStates[equiGroups[a][0]].getTransitions().size(); b++) {
-
             int index = 0;
 
             for (uint c=0; c<equiGroups.size(); c++) {
@@ -358,6 +356,7 @@ void Automaton::minimizeDFA() {
             minimalStates["q"+to_string(a)].addTransition("q"+to_string(a), "q"+to_string(index), deterministicStates[equiGroups[a][0]].getTransitions()[b].getSymbol());
         }
     }
+
 
 }
 
